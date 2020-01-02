@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#b1").click(function(){
+    var txt = "";
+    txt += "Width of div: " + $("#div1").width() + "</br>";
+    txt += "Height of div: " + $("#div1").height();
+    $("#div1").html(txt);
+  });
+ $("#b2").click(function(){
+    $("#div1").remove();
+  });
+  $("#b3").click(function(){
+    $("p").append(" <b>Appended text</b>.");
+  });
+  $("#b4").click(function(){
+    $("#p1").css("color", "red").slideUp(2000).slideDown(2000);
+  });
+  $("#b5").click(function(){
+    $("div").animate({left: '250px'});
+  });
+  $("#flip").click(function(){
+    $("#panel").slideToggle("slow");
+  });
+});
+</script>
+<style>
+#div1 {
+  height: 100px;
+  width: 300px;
+  padding: 10px;
+  margin: 3px;
+  border: 1px solid blue;
+  background-color: lightblue;
+}
+#panel, #flip {
+  padding: 5px;
+  text-align: center;
+  background-color: #e5eecc;
+  border: solid 1px #c3c3c3;
+}
+
+#panel {
+  padding: 50px;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div id="div1"></div>
+<br>
+
+<button id="b1">Display dimensions of div</button>
+<button id="b2">Remove dimensions of div</button>
+<button id="b3">Click To Append Some Text</button>
+<p>width() - returns the width of an element.</p>
+<p>height() - returns the height of an element.</p>
+<p id="p1">Slide Up and Down!!</p>
+
+<button id="b4">Click me to slide</button>
+<br>
+<br>
+<button id="b5">Click to Start Animation</button>
+<br>
+<br>
+<br>
+<br>
+<div style="background:#98bf21;height:100px;width:100px;position:absolute;">
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<div id="flip">Click to slide the panel down or up</div>
+<div id="panel">Hello world!</div>
+</body>
+</html>
