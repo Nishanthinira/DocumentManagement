@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/NewLayout.cshtml";
+}
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    /*
+    .chart rect {
+      fill: steelblue;
+    }
+    */
+    .chart .legend {
+        fill: black;
+        font: 14px sans-serif;
+        text-anchor: start;
+        font-size: 12px;
+    }
+
+    .chart text {
+        fill: white;
+        font: 10px sans-serif;
+        text-anchor: end;
+    }
+
+    .chart .label {
+        fill: black;
+        font: 14px sans-serif;
+        text-anchor: end;
+    }
+
+    .bar:hover {
+        fill: brown;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+</style>
+<svg class="chart" style="transform:rotateZ(-90deg);margin-top:-20em;margin-left:24em"></svg>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="~/scripts/HistogramScript.js"></script>

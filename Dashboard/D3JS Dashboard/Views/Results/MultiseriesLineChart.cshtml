@@ -1,0 +1,681 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+
+}
+@*<!DOCTYPE html>
+    <html>
+
+    <head>
+        <script data-require="d3@3.5.3" data-semver="3.5.3" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js"></script>
+        <style>
+            body {
+                font: 10px sans-serif;
+            }
+
+            .axis path,
+            .axis line {
+                fill: none;
+                stroke: #000;
+                shape-rendering: crispEdges;
+            }
+
+            .x.axis path {
+                display: none;
+            }
+
+            .line {
+                fill: none;
+                stroke: steelblue;
+                stroke-width: 1.5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <script>
+        var myData = "date	Nishanthini	Kabilan	Praveen\n\
+    20111001	63.4	62.7	72.2\n\
+    20111002	58.0	59.9	67.7\n\
+    20111003	53.3	59.1	69.4\n\
+    20111004	55.7	58.8	68.0\n\
+    20111005	64.2	58.7	72.4\n\
+    20111006	58.8	57.0	77.0\n\
+    20111007	57.9	56.7	82.3\n\
+    20111008	61.8	56.8	78.9\n\
+    20111009	69.3	56.7	68.8\n\
+    20111010	71.2	60.1	68.7\n\
+    20111011	68.7	61.1	70.3\n\
+    20111012	61.8	61.5	75.3\n\
+    20111013	63.0	64.3	76.6\n\
+    20111014	66.9	67.1	66.6\n\
+    20111015	61.7	64.6	68.0\n\
+    20111016	61.8	61.6	70.6\n\
+    20111017	62.8	61.1	71.1\n\
+    20111018	60.8	59.2	70.0\n\
+    20111019	62.1	58.9	61.6\n\
+    20111020	65.1	57.2	57.4\n\
+    20111021	55.6	56.4	64.3\n\
+    20111022	54.4	60.7	72.4\n";
+
+        var margin = {
+            top: 20,
+            right: 80,
+            bottom: 30,
+            left: 50
+          },
+          width = 900 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+        var parseDate = d3.time.format("%Y%m%d").parse;
+
+        var x = d3.time.scale()
+          .range([0, width]);
+
+        var y = d3.scale.linear()
+          .range([height, 0]);
+
+        var color = d3.scale.category10();
+
+        var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left");
+
+        var line = d3.svg.line()
+          .interpolate("basis")
+          .x(function(d) {
+            return x(d.date);
+          })
+          .y(function(d) {
+            return y(d.temperature);
+          });
+
+        var svgs = d3.select("body").append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var data = d3.tsv.parse(myData);
+
+        color.domain(d3.keys(data[0]).filter(function(key) {
+          return key !== "date";
+        }));
+
+        data.forEach(function(d) {
+          d.date = parseDate(d.date);
+        });
+
+        var cities = color.domain().map(function(name) {
+          return {
+            name: name,
+            values: data.map(function(d) {
+              return {
+                date: d.date,
+                temperature: +d[name]
+              };
+            })
+          };
+        });
+
+        x.domain(d3.extent(data, function(d) {
+          return d.date;
+        }));
+
+        y.domain([
+          d3.min(cities, function(c) {
+            return d3.min(c.values, function(v) {
+              return v.temperature;
+            });
+          }),
+          d3.max(cities, function(c) {
+            return d3.max(c.values, function(v) {
+              return v.temperature;
+            });
+          })
+        ]);
+
+        var legend = svgs.selectAll('g')
+          .data(cities)
+          .enter()
+          .append('g')
+          .attr('class', 'legend');
+
+        legend.append('rect')
+          .attr('x', width - 20)
+          .attr('y', function(d, i) {
+            return i * 20;
+          })
+          .attr('width', 10)
+          .attr('height', 10)
+          .style('fill', function(d) {
+            return color(d.name);
+          });
+
+        legend.append('text')
+          .attr('x', width - 8)
+          .attr('y', function(d, i) {
+            return (i * 20) + 9;
+          })
+          .text(function(d) {
+            return d.name;
+          });
+
+            svgs.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+            svgs.append("g")
+          .attr("class", "y axis")
+          .call(yAxis)
+          .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", ".71em")
+          .style("text-anchor", "end")
+          .text("Marks");
+
+            var city = svgs.selectAll(".city")
+          .data(cities)
+          .enter().append("g")
+          .attr("class", "city");
+
+        city.append("path")
+          .attr("class", "line")
+          .attr("d", function(d) {
+            return line(d.values);
+          })
+          .style("stroke", function(d) {
+            return color(d.name);
+          });
+
+        city.append("text")
+          .datum(function(d) {
+            return {
+              name: d.name,
+              value: d.values[d.values.length - 1]
+            };
+          })
+          .attr("transform", function(d) {
+            return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
+          })
+          .attr("x", 3)
+          .attr("dy", ".35em")
+          .text(function(d) {
+            return d.name;
+          });
+
+        var mouseG = svgs.append("g")
+          .attr("class", "mouse-over-effects");
+
+        mouseG.append("path") // this is the black vertical line to follow mouse
+          .attr("class", "mouse-line")
+          .style("stroke", "black")
+          .style("stroke-width", "1px")
+          .style("opacity", "0");
+
+        var lines = document.getElementsByClassName('line');
+
+        var mousePerLine = mouseG.selectAll('.mouse-per-line')
+          .data(cities)
+          .enter()
+          .append("g")
+          .attr("class", "mouse-per-line");
+
+        mousePerLine.append("circle")
+          .attr("r", 7)
+          .style("stroke", function(d) {
+            return color(d.name);
+          })
+          .style("fill", "none")
+          .style("stroke-width", "1px")
+          .style("opacity", "0");
+
+        mousePerLine.append("text")
+          .attr("transform", "translate(10,3)");
+
+            mouseG.append('svgs:rect') // append a rect to catch mouse movements on canvas
+          .attr('width', width) // can't catch mouse events on a g element
+          .attr('height', height)
+          .attr('fill', 'none')
+          .attr('pointer-events', 'all')
+          .on('mouseout', function() { // on mouse out hide line, circles and text
+            d3.select(".mouse-line")
+              .style("opacity", "0");
+            d3.selectAll(".mouse-per-line circle")
+              .style("opacity", "0");
+            d3.selectAll(".mouse-per-line text")
+              .style("opacity", "0");
+          })
+          .on('mouseover', function() { // on mouse in show line, circles and text
+            d3.select(".mouse-line")
+              .style("opacity", "1");
+            d3.selectAll(".mouse-per-line circle")
+              .style("opacity", "1");
+            d3.selectAll(".mouse-per-line text")
+              .style("opacity", "1");
+          })
+          .on('mousemove', function() { // mouse moving over canvas
+            var mouse = d3.mouse(this);
+            d3.select(".mouse-line")
+              .attr("d", function() {
+                var d = "M" + mouse[0] + "," + height;
+                d += " " + mouse[0] + "," + 0;
+                return d;
+              });
+
+            d3.selectAll(".mouse-per-line")
+              .attr("transform", function(d, i) {
+                console.log(width/mouse[0])
+                var xDate = x.invert(mouse[0]),
+                    bisect = d3.bisector(function(d) { return d.date; }).right;
+                    idx = bisect(d.values, xDate);
+
+                var beginning = 0,
+                    end = lines[i].getTotalLength(),
+                    target = null;
+
+                while (true){
+                  target = Math.floor((beginning + end) / 2);
+                  pos = lines[i].getPointAtLength(target);
+                  if ((target === end || target === beginning) && pos.x !== mouse[0]) {
+                      break;
+                  }
+                  if (pos.x > mouse[0])      end = target;
+                  else if (pos.x < mouse[0]) beginning = target;
+                  else break; //position found
+                }
+
+                d3.select(this).select('text')
+                  .text(y.invert(pos.y).toFixed(2));
+
+                return "translate(" + mouse[0] + "," + pos.y +")";
+              });
+          });
+
+        </script>
+    </body>
+
+    </html>*@
+
+@*<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+        svg {
+    font-family: Sans-Serif, Arial;
+}
+.line {
+  stroke-width: 2;
+  fill: none;
+}
+
+.axis path {
+  stroke: black;
+}
+
+.text {
+  font-size: 12px;
+}
+
+.title-text {
+  font-size: 12px;
+}
+    </style>
+<script>
+    var data = [
+  {
+      name: "USA",
+      values: [
+        { date: "2000", price: "100" },
+        { date: "2001", price: "110" },
+        { date: "2002", price: "145" },
+        { date: "2003", price: "241" },
+        { date: "2004", price: "101" },
+        { date: "2005", price: "90" },
+        { date: "2006", price: "10" },
+        { date: "2007", price: "35" },
+        { date: "2008", price: "21" },
+        { date: "2009", price: "201" }
+      ]
+  },
+  {
+      name: "Canada",
+      values: [
+        { date: "2000", price: "200" },
+        { date: "2001", price: "120" },
+        { date: "2002", price: "33" },
+        { date: "2003", price: "21" },
+        { date: "2004", price: "51" },
+        { date: "2005", price: "190" },
+        { date: "2006", price: "120" },
+        { date: "2007", price: "85" },
+        { date: "2008", price: "221" },
+        { date: "2009", price: "101" }
+      ]
+  },
+  {
+      name: "Maxico",
+      values: [
+        { date: "2000", price: "50" },
+        { date: "2001", price: "10" },
+        { date: "2002", price: "5" },
+        { date: "2003", price: "71" },
+        { date: "2004", price: "20" },
+        { date: "2005", price: "9" },
+        { date: "2006", price: "220" },
+        { date: "2007", price: "235" },
+        { date: "2008", price: "61" },
+        { date: "2009", price: "10" }
+      ]
+  }
+    ];
+
+    var width = 500;
+    var height = 300;
+    var margin = 50;
+    var duration = 250;
+
+    var lineOpacity = "0.25";
+    var lineOpacityHover = "0.85";
+    var otherLinesOpacityHover = "0.1";
+    var lineStroke = "1.5px";
+    var lineStrokeHover = "2.5px";
+
+    var circleOpacity = '0.85';
+    var circleOpacityOnLineHover = "0.25"
+    var circleRadius = 3;
+    var circleRadiusHover = 6;
+
+
+    /* Format Data */
+    var parseDate = d3.timeParse("%Y");
+    data.forEach(function (d) {
+        d.values.forEach(function (d) {
+            d.date = parseDate(d.date);
+            d.price = +d.price;
+        });
+    });
+
+
+    /* Scale */
+    var xScale = d3.scaleTime()
+      .domain(d3.extent(data[0].values, d => d.date))
+      .range([0, width - margin]);
+
+    var yScale = d3.scaleLinear()
+      .domain([0, d3.max(data[0].values, d => d.price)])
+      .range([height - margin, 0]);
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    /* Add SVG */
+    var svg = d3.select("#chart").append("svg")
+      .attr("width", (width + margin) + "px")
+      .attr("height", (height + margin) + "px")
+      .append('g')
+      .attr("transform", `translate(${margin}, ${margin})`);
+
+
+    /* Add line into SVG */
+    var line = d3.line()
+      .x(d => xScale(d.date))
+      .y(d => yScale(d.price));
+
+    let lines = svg.append('g')
+      .attr('class', 'lines');
+
+    lines.selectAll('.line-group')
+      .data(data).enter()
+      .append('g')
+      .attr('class', 'line-group')
+      .on("mouseover", function (d, i) {
+          svg.append("text")
+            .attr("class", "title-text")
+            .style("fill", color(i))
+            .text(d.name)
+            .attr("text-anchor", "middle")
+            .attr("x", (width - margin) / 2)
+            .attr("y", 5);
+      })
+      .on("mouseout", function (d) {
+          svg.select(".title-text").remove();
+      })
+      .append('path')
+      .attr('class', 'line')
+      .attr('d', d => line(d.values))
+      .style('stroke', (d, i) => color(i))
+      .style('opacity', lineOpacity)
+      .on("mouseover", function (d) {
+          d3.selectAll('.line')
+                        .style('opacity', otherLinesOpacityHover);
+          d3.selectAll('.circle')
+                        .style('opacity', circleOpacityOnLineHover);
+          d3.select(this)
+            .style('opacity', lineOpacityHover)
+            .style("stroke-width", lineStrokeHover)
+            .style("cursor", "pointer");
+      })
+      .on("mouseout", function (d) {
+          d3.selectAll(".line")
+                        .style('opacity', lineOpacity);
+          d3.selectAll('.circle')
+                        .style('opacity', circleOpacity);
+          d3.select(this)
+            .style("stroke-width", lineStroke)
+            .style("cursor", "none");
+      });
+
+
+    /* Add circles in the line */
+    lines.selectAll("circle-group")
+      .data(data).enter()
+      .append("g")
+      .style("fill", (d, i) => color(i))
+      .selectAll("circle")
+      .data(d => d.values).enter()
+      .append("g")
+      .attr("class", "circle")
+      .on("mouseover", function (d) {
+          d3.select(this)
+            .style("cursor", "pointer")
+            .append("text")
+            .attr("class", "text")
+            .text(`${d.price}`)
+            .attr("x", d => xScale(d.date) + 5)
+            .attr("y", d => yScale(d.price) - 10);
+      })
+      .on("mouseout", function (d) {
+          d3.select(this)
+            .style("cursor", "none")
+            .transition()
+            .duration(duration)
+            .selectAll(".text").remove();
+      })
+      .append("circle")
+      .attr("cx", d => xScale(d.date))
+      .attr("cy", d => yScale(d.price))
+      .attr("r", circleRadius)
+      .style('opacity', circleOpacity)
+      .on("mouseover", function (d) {
+          d3.select(this)
+            .transition()
+            .duration(duration)
+            .attr("r", circleRadiusHover);
+      })
+        .on("mouseout", function (d) {
+            d3.select(this)
+              .transition()
+              .duration(duration)
+              .attr("r", circleRadius);
+        });
+
+
+    /* Add Axis into SVG */
+    var xAxis = d3.axisBottom(xScale).ticks(5);
+    var yAxis = d3.axisLeft(yScale).ticks(5);
+
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", `translate(0, ${height - margin})`)
+      .call(xAxis);
+
+    svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+      .append('text')
+      .attr("y", 15)
+      .attr("transform", "rotate(-90)")
+      .attr("fill", "#000")
+      .text("Total values");
+</script>
+</head>
+<body>
+    <div id="chart"></div>
+</body>
+</html>*@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<!-- Color Scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 100, bottom: 30, left: 30},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+//Read the data
+d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_connectedscatter.csv", function(data) {
+
+    // List of groups (here I have one group per column)
+    var allGroup = ["valueA", "valueB", "valueC"]
+
+    // Reformat the data: we need an array of arrays of {x, y} tuples
+    var dataReady = allGroup.map( function(grpName) { // .map allows to do something for each element of the list
+      return {
+        name: grpName,
+        values: data.map(function(d) {
+          return {time: d.time, value: +d[grpName]};
+        })
+      };
+    });
+    // I strongly advise to have a look to dataReady with
+    // console.log(dataReady)
+
+    // A color scale: one color for each group
+    var myColor = d3.scaleOrdinal()
+      .domain(allGroup)
+      .range(d3.schemeSet2);
+
+    // Add X axis --> it is a date format
+    var x = d3.scaleLinear()
+      .domain([0,10])
+      .range([ 0, width ]);
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain( [0,20])
+      .range([ height, 0 ]);
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+    // Add the lines
+    var line = d3.line()
+      .x(function(d) { return x(+d.time) })
+      .y(function(d) { return y(+d.value) })
+    svg.selectAll("myLines")
+      .data(dataReady)
+      .enter()
+      .append("path")
+        .attr("class", function(d){ return d.name })
+        .attr("d", function(d){ return line(d.values) } )
+        .attr("stroke", function(d){ return myColor(d.name) })
+        .style("stroke-width", 4)
+        .style("fill", "none")
+
+    // Add the points
+    svg
+      // First we need to enter in a group
+      .selectAll("myDots")
+      .data(dataReady)
+      .enter()
+        .append('g')
+        .style("fill", function(d){ return myColor(d.name) })
+        .attr("class", function(d){ return d.name })
+      // Second we need to enter in the 'values' part of this group
+      .selectAll("myPoints")
+      .data(function(d){ return d.values })
+      .enter()
+      .append("circle")
+        .attr("cx", function(d) { return x(d.time) } )
+        .attr("cy", function(d) { return y(d.value) } )
+        .attr("r", 5)
+        .attr("stroke", "white")
+
+    // Add a label at the end of each line
+    svg
+      .selectAll("myLabels")
+      .data(dataReady)
+      .enter()
+        .append('g')
+        .append("text")
+          .attr("class", function(d){ return d.name })
+          .datum(function(d) { return {name: d.name, value: d.values[d.values.length - 1]}; }) // keep only the last value of each time series
+          .attr("transform", function(d) { return "translate(" + x(d.value.time) + "," + y(d.value.value) + ")"; }) // Put the text at the position of the last point
+          .attr("x", 12) // shift the text a bit more right
+          .text(function(d) { return d.name; })
+          .style("fill", function(d){ return myColor(d.name) })
+          .style("font-size", 15)
+
+    // Add a legend (interactive)
+    svg
+      .selectAll("myLegend")
+      .data(dataReady)
+      .enter()
+        .append('g')
+        .append("text")
+          .attr('x', function(d,i){ return 30 + i*60})
+          .attr('y', 30)
+          .text(function(d) { return d.name; })
+          .style("fill", function(d){ return myColor(d.name) })
+          .style("font-size", 15)
+        .on("click", function(d){
+          // is the element currently visible ?
+          currentOpacity = d3.selectAll("." + d.name).style("opacity")
+          // Change the opacity: from 0 to 1 or from 1 to 0
+          d3.selectAll("." + d.name).transition().style("opacity", currentOpacity == 1 ? 0:1)
+
+        })
+})
+
+
+</script>

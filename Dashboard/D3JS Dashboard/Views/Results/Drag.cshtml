@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/NewLayout.cshtml";
+
+}
+<!DOCTYPE html>
+<html>
+<body>
+
+   <div id="mydiv">
+        <div id="mydivheader">Click here to move</div>
+        <p>Move</p>
+        <p>this</p>
+        <p>DIV</p>
+    </div>
+    <script src="~/scripts/DragScript.js"></script>
+
+    <link href="~/Content/css/DragCSS.css" rel="stylesheet" />
+    <script>
+dragElement(document.getElementById("mydiv"));
+    </script>
+</body>
+</html>

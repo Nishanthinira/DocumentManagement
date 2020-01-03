@@ -1,0 +1,96 @@
+\\ASPIRE1609\dash\D3JS Dashboard\bin\ApplicationInsights.config
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\csc.exe
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\System.Collections.Immutable.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\vbc.exe
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\VBCSCompiler.exe
+\\ASPIRE1609\dash\D3JS Dashboard\bin\roslyn\VBCSCompiler.exe.config
+\\ASPIRE1609\dash\D3JS Dashboard\bin\D3JS Dashboard.dll.config
+\\ASPIRE1609\dash\D3JS Dashboard\bin\D3JS Dashboard.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\D3JS Dashboard.pdb
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.Agent.Intercept.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.DependencyCollector.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.PerfCounterCollector.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.ServerTelemetryChannel.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.Web.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.WindowsServer.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.ApplicationInsights.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.Web.Infrastructure.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Helpers.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Mvc.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Razor.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Webpages.Deployment.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Webpages.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Webpages.Razor.dll
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.DependencyCollector.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.ServerTelemetryChannel.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.Web.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.AI.WindowsServer.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.ApplicationInsights.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Razor.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Webpages.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Webpages.Deployment.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Webpages.Razor.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Helpers.xml
+\\ASPIRE1609\dash\D3JS Dashboard\bin\System.Web.Mvc.xml
+\\ASPIRE1609\dash\D3JS Dashboard\obj\Release\D3JS Dashboard.csprojResolveAssemblyReference.cache
+\\ASPIRE1609\dash\D3JS Dashboard\obj\Release\D3JS Dashboard.dll
+\\ASPIRE1609\dash\D3JS Dashboard\obj\Release\D3JS Dashboard.pdb
+D:\Dashboard\D3JS Dashboard\bin\ApplicationInsights.config
+D:\Dashboard\D3JS Dashboard\bin\roslyn\csc.exe
+D:\Dashboard\D3JS Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Dashboard\D3JS Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Dashboard\D3JS Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Dashboard\D3JS Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Dashboard\D3JS Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Dashboard\D3JS Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Dashboard\D3JS Dashboard\bin\roslyn\System.Collections.Immutable.dll
+D:\Dashboard\D3JS Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+D:\Dashboard\D3JS Dashboard\bin\roslyn\vbc.exe
+D:\Dashboard\D3JS Dashboard\bin\roslyn\VBCSCompiler.exe
+D:\Dashboard\D3JS Dashboard\bin\roslyn\VBCSCompiler.exe.config
+D:\Dashboard\D3JS Dashboard\bin\D3JS Dashboard.dll.config
+D:\Dashboard\D3JS Dashboard\bin\D3JS Dashboard.dll
+D:\Dashboard\D3JS Dashboard\bin\D3JS Dashboard.pdb
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.DependencyCollector.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.Web.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.WindowsServer.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.ApplicationInsights.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.Web.Infrastructure.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Helpers.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Mvc.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Razor.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Webpages.Deployment.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Webpages.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Webpages.Razor.dll
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.DependencyCollector.xml
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.Web.xml
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.AI.WindowsServer.xml
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.ApplicationInsights.xml
+D:\Dashboard\D3JS Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Razor.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Webpages.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Webpages.Deployment.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Webpages.Razor.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Helpers.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Web.Mvc.xml
+D:\Dashboard\D3JS Dashboard\obj\Release\D3JS Dashboard.csprojResolveAssemblyReference.cache
+D:\Dashboard\D3JS Dashboard\obj\Release\D3JS Dashboard.dll
+D:\Dashboard\D3JS Dashboard\obj\Release\D3JS Dashboard.pdb
+D:\Dashboard\D3JS Dashboard\bin\Newtonsoft.Json.dll
+D:\Dashboard\D3JS Dashboard\bin\System.Net.Http.Formatting.dll
+D:\Dashboard\D3JS Dashboard\bin\Newtonsoft.Json.xml
+D:\Dashboard\D3JS Dashboard\bin\System.Net.Http.Formatting.xml

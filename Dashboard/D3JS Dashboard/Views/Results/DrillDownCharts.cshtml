@@ -1,0 +1,231 @@
+﻿
+@{
+    ViewBag.Title = "DrillDownCharts";
+}
+
+<h2>DrillDownCharts</h2>
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+    }
+
+    #chartdiv1, #chartdiv2 {
+        width: 49%;
+        height: 100%;
+        float: left;
+    }
+</style>
+<script>
+    var chartData = [{
+        "department": "Marketing",
+        "projects": 23,
+        "url": "#",
+        "description": "click to drill-down",
+        "months": [{
+            "category": 1,
+            "projects": 1
+        }, {
+            "category": 2,
+            "projects": 2
+        }, {
+            "category": 3,
+            "projects": 1
+        }, {
+            "category": 4,
+            "projects": 3
+        }, {
+            "category": 5,
+            "projects": 2
+        }, {
+            "category": 6,
+            "projects": 1
+        }, {
+            "category": 7,
+            "projects": 2
+        }, {
+            "category": 8,
+            "projects": 3
+        }, {
+            "category": 9,
+            "projects": 3
+        }, {
+            "category": 10,
+            "projects": 1
+        }, {
+            "category": 11,
+            "projects": 1
+        }, {
+            "category": 12,
+            "projects": 3
+        }]
+    }, {
+        "department": "Sales",
+        "projects": 26,
+        "url": "#",
+        "description": "click to drill-down",
+        "months": [{
+            "category": 1,
+            "projects": 4
+        }, {
+            "category": 2,
+            "projects": 3
+        }, {
+            "category": 3,
+            "projects": 1
+        }, {
+            "category": 4,
+            "projects": 4
+        }, {
+            "category": 5,
+            "projects": 2
+        }, {
+            "category": 6,
+            "projects": 1
+        }, {
+            "category": 7,
+            "projects": 2
+        }, {
+            "category": 8,
+            "projects": 2
+        }, {
+            "category": 9,
+            "projects": 3
+        }, {
+            "category": 10,
+            "projects": 1
+        }, {
+            "category": 11,
+            "projects": 1
+        }, {
+            "category": 12,
+            "projects": 3
+        }]
+    }, {
+        "department": "Logistics",
+        "projects": 30,
+        "url": "#",
+        "description": "click to drill-down",
+        "months": [{
+            "category": 1,
+            "projects": 2
+        }, {
+            "category": 2,
+            "projects": 3
+        }, {
+            "category": 3,
+            "projects": 1
+        }, {
+            "category": 4,
+            "projects": 5
+        }, {
+            "category": 5,
+            "projects": 2
+        }, {
+            "category": 6,
+            "projects": 1
+        }, {
+            "category": 7,
+            "projects": 2
+        }, {
+            "category": 8,
+            "projects": 2
+        }, {
+            "category": 9,
+            "projects": 3
+        }, {
+            "category": 10,
+            "projects": 1
+        }, {
+            "category": 11,
+            "projects": 1
+        }, {
+            "category": 12,
+            "projects": 3
+        }]
+    }];
+
+    // aggregate collective data
+    var collectiveData = [];
+    for (var x in chartData) {
+        var dataPoint = chartData[x];
+        if (0 == x) {
+            for (var y in dataPoint.months) {
+                collectiveData.push({
+                    "category": dataPoint.months[y].category,
+                    "projects": dataPoint.months[y].projects
+                });
+            }
+        } else {
+            for (var y in dataPoint.months) {
+                collectiveData[y].projects += dataPoint.months[y].projects;
+            }
+        }
+    }
+
+    // create pie chart
+    var chart = AmCharts.makeChart("chartdiv1", {
+        "type": "pie",
+        "dataProvider": chartData,
+        "valueField": "projects",
+        "titleField": "department",
+        "labelText": "[[title]]: [[value]]",
+        "pullOutOnlyOne": true
+    });
+
+    // create column chart
+    var chart2 = AmCharts.makeChart("chartdiv2", {
+        "type": "serial",
+        "theme": "none",
+        "pathToImages": "/lib/3/images/",
+        "autoMargins": false,
+        "marginLeft": 30,
+        "marginRight": 8,
+        "marginTop": 10,
+        "marginBottom": 26,
+        "titles": [{
+            "text": "All departments"
+        }],
+        "dataProvider": collectiveData,
+        "startDuration": 1,
+        "graphs": [{
+            "title": "projects",
+            "type": "column",
+            "fillAlphas": 0.8,
+            "valueField": "projects"
+        }],
+        "categoryField": "category",
+        "categoryAxis": {
+            "gridPosition": "start",
+            "autoGridCount": false,
+            "gridCount": 12
+        },
+        "valueAxes": [{
+            "integersOnly": true
+        }]
+    });
+
+    chart.addListener("pullOutSlice", function (event) {
+        chart2.dataProvider = event.dataItem.dataContext.months;
+        chart2.titles[0].text = event.dataItem.dataContext.department;
+        chart2.validateData();
+        chart2.animateAgain();
+    });
+
+    chart.addListener("pullInSlice", function (event) {
+        chart2.dataProvider = collectiveData;
+        chart2.titles[0].text = "All departments";
+        chart2.validateData();
+        chart2.animateAgain();
+    });
+</script>
+<body>
+    <script src="//www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="//www.amcharts.com/lib/3/pie.js"></script>
+    <script src="//www.amcharts.com/lib/3/serial.js"></script>
+    <script src="//www.amcharts.com/lib/3/themes/light.js"></script>
+
+    <div id="chartdiv1"></div>
+    <div id="chartdiv2"></div>
+</body>

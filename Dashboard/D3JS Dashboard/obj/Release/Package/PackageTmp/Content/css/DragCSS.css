@@ -1,0 +1,73 @@
+﻿    #mydiv {
+        position: absolute;
+        z-index: 9;
+        /*background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;*/
+    }
+
+    #mydivheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        /*background-color: #2196F3;
+        color: #fff;*/
+    }
+        #HeatMaps {
+        position: absolute;
+        z-index: 9;
+        /*background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;*/
+    }
+
+    #HeatMapsheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        /*background-color: #2196F3;
+        color: #fff;*/
+    }
+     #PieWithBar {
+        position: absolute;
+        z-index: 9;
+        /*background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;*/
+    }
+
+    #PieWithBarheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        /*background-color: #2196F3;
+        color: #fff;*/
+    } #histogram {
+        position: absolute;
+        z-index: 9;
+        /*background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;*/
+    }
+
+    #histogramheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        /*background-color: #2196F3;
+        color: #fff;*/
+    } #display {
+        position: absolute;
+        z-index: 9;
+        /*background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;*/
+    }
+
+    #displayheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        /*background-color: #2196F3;
+        color: #fff;*/
+    }

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body style="margin-top:-50px;background-color:white">
+    <div style="background-color:whitesmoke;display:none;" class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large"
+                onclick="w3_close()">
+            Close &times;
+        </button>
+        <a class="w3-bar-item w3-button" onclick="location.href='@Url.Action("Reading", "Results")'" style="background-color:powderblue;font-size:larger">Reading</a>
+        <a class="w3-bar-item w3-button" onclick="location.href='@Url.Action("Listening", "Results")'" style="background-color:powderblue;font-size:larger">Listening</a>
+        <a class="w3-bar-item w3-button" onclick="location.href='@Url.Action("Speaking", "Results")'" style="background-color:powderblue;font-size:larger">Speaking</a>
+        <a class="w3-bar-item w3-button" onclick="location.href='@Url.Action("Writing", "Results")'"  style="background-color:powderblue;font-size:larger">Writing</a>
+    </div>
+    <div id="main">
+
+        <div class="w3-teal">
+            <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <div class="w3-container">
+                <h1>English Test Performance</h1>
+            </div>
+        </div>
+
+    </div>
+    <script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+    </script>
+    <div class="container body-content">
+        <br />
+        <center>
+            @RenderBody()
+        </center>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

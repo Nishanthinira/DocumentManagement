@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = null;
+
+}
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+  <style>
+  </style>
+@*<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+</style>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz" class="divelement"></div>
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 80, bottom: 30, left: 60},
+    width = 350 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")")
+
+//Read the data
+
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+
+  // Add X axis
+  var x = d3.scaleLinear()
+    .domain([0, 0])
+    .range([ 0, width ]);
+  svg.append("g")
+    .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .attr("opacity", "0")
+
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 500000])
+    .range([ height, 0]);
+  svg.append("g")
+    .call(d3.axisLeft(y));
+
+  // Add dots
+  svg.append('g')
+    .selectAll("dot")
+    .data(data)
+    .enter()
+    .append("circle")
+      .attr("cx", function (d) { return x(d.GrLivArea); } )
+      .attr("cy", function (d) { return y(d.SalePrice); } )
+      .attr("r", 2.5)
+      .style("fill", "black")
+
+  // new X axis
+  x.domain([0, 4000])
+  svg.select(".myXaxis")
+    .transition()
+    .duration(2000)
+    .attr("opacity", "1")
+    .call(d3.axisBottom(x));
+
+  svg.selectAll("circle")
+    .transition()
+    .delay(function(d,i){return(i*3)})
+    .duration(2000)
+    .attr("cx", function (d) { return x(d.GrLivArea); } )
+    .attr("cy", function (d) { return y(d.SalePrice); } )
+})
+
+</script>*@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .pie-chart .slice {
+        stroke: black;
+    }
+</style>
+<body style="background-color:white">
+    <div id="chart1"></div>
+    <div class="container" style="margin-left:20px">
+        <div class="row">
+            <div class="col-sm">
+                @*</div><svg class="chart js-chart"></svg>*@
+            <div id="my_dataviz" class="divelement">
+                <div id="my_dataviz1"></div>
+            </div>
+            </div>
+        </div>
+     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript">
+                    //"use strict";
+
+                    ///* global d3, document, window */
+                    //function pieChart(options) {
+                    //    var animationDuration = 750,
+                    //      color = d3.scaleOrdinal(d3.schemeCategory10),
+                    //      data = [],
+                    //      innerRadius = 0,
+                    //      outerRadius = 70,
+                    //      arc = d3.arc(),
+                    //      pie = d3.pie()
+                    //        .sort(null)
+                    //        .value(function (d) {
+                    //            return d.value;
+                    //        });
+
+                    //    function updateTween(d) {
+                    //        var i = d3.interpolate(this._current, d);
+                    //        this._current = i(0);
+                    //        return function (t) {
+                    //            return arc(i(t));
+                    //        };
+                    //    }
+
+                    //    function exitTween(d) {
+                    //        var end = Object.assign({}, this._current, { startAngle: this._current.endAngle });
+                    //        var i = d3.interpolate(d, end);
+                    //        return function (t) {
+                    //            return arc(i(t));
+                    //        };
+                    //    }
+
+                    //    function joinKey(d) {
+                    //        return d.data.series;
+                    //    }
+
+                    //    function pieChart(context) {
+                    //        var slices = context.selectAll('.slice').data(pie(data), joinKey);
+
+                    //        var oldSlices = slices.exit();
+
+                    //        var newSlices = slices.enter().append('path')
+                    //          .each(function (d) { this._current = Object.assign({}, d, { startAngle: d.endAngle }); })
+                    //          .attr('class', 'slice')
+                    //          .style('fill', function (d) { return color(joinKey(d)); });
+
+                    //        var t = d3.transition().duration(animationDuration);
+
+                    //        arc.innerRadius(innerRadius).outerRadius(outerRadius);
+
+                    //        oldSlices
+                    //          .transition(t)
+                    //            .attrTween('d', exitTween)
+                    //            .remove();
+
+                    //        var t2 = t.transition();
+                    //        slices
+                    //          .transition(t2)
+                    //            .attrTween('d', updateTween);
+
+                    //        var t3 = t2.transition();
+                    //        newSlices
+                    //          .transition(t3)
+                    //            .attrTween('d', updateTween);
+                    //    }
+
+                    //    pieChart.data = function (_) {
+                    //        return arguments.length ? (data = _, pieChart) : data;
+                    //    };
+
+                    //    pieChart.innerRadius = function (_) {
+                    //        return arguments.length ? (innerRadius = _, pieChart) : innerRadius;
+                    //    };
+
+                    //    pieChart.outerRadius = function (_) {
+                    //        return arguments.length ? (outerRadius = _, pieChart) : outerRadius;
+                    //    };
+
+                    //    return pieChart;
+                    //}
+
+                    //var width = 300;
+                    //var height = 400;
+                    //var dataset1 = [{ series: 1, value: 1 }, { series: 2, value: 2 }, { series: 3, value: 3 }, { series: 4, value: 4 }, { series: 5, value: 5 }];
+                    //var pieChart = pieChart().outerRadius(120).innerRadius(80);
+
+                    //var svg = d3.select('.js-chart')
+                    //  .attr('width', width)
+                    //  .attr('height', height);
+
+                    //var domPieChart = svg.append('g')
+                    //  .attr('class', 'pie-chart')
+                    //  .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+                    //  .attr('text', dataset1.series)
+                    //  .call(pieChart.data(dataset1));
+
+                    //var toggle = true;
+                    //domPieChart.call(pieChart.data(dataset1));
+                    //window.setInterval(function () {
+                    //    if (toggle) {
+                    //        domPieChart.call(pieChart.data(dataset1));
+                    //    } else {
+                    //        domPieChart.call(pieChart.data(dataset1));
+                    //    }
+                    //    toggle = !toggle;
+                    //}, 3500);
+
+                    // set the dimensions and margins of the graph
+                    var margin = { top: 10, right: 80, bottom: 30, left: 60 },
+                        width = 350 - margin.left - margin.right,
+                        height = 300 - margin.top - margin.bottom;
+                    // append the svg object to the body of the page
+                    var svg = d3.select("#my_dataviz")
+                      .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                      .append("g")
+                        .attr("transform",
+                              "translate(" + margin.left + "," + margin.top + ")")
+
+                    //Read the data
+
+                    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function (data) {
+
+                        // Add X axis
+                        var x = d3.scaleLinear()
+                          .domain([0, 0])
+                          .range([0, width]);
+                        svg.append("g")
+                          .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
+                          .attr("transform", "translate(0," + height + ")")
+                          .call(d3.axisBottom(x))
+                          .attr("opacity", "0")
+
+                        // Add Y axis
+                        var y = d3.scaleLinear()
+                          .domain([0, 500000])
+                          .range([height, 0]);
+                        svg.append("g")
+                          .call(d3.axisLeft(y));
+
+                        // Add dots
+                        svg.append('g')
+                          .selectAll("dot")
+                          .data(data)
+                          .enter()
+                          .append("circle")
+                            .attr("cx", function (d) { return x(d.GrLivArea); })
+                            .attr("cy", function (d) { return y(d.SalePrice); })
+                            .attr("r", 2.5)
+                            .style("fill", "black")
+
+                        // new X axis
+                        x.domain([0, 4000])
+                        svg.select(".myXaxis")
+                          .transition()
+                          .duration(2000)
+                          .attr("opacity", "1")
+                          .call(d3.axisBottom(x));
+
+                        svg.selectAll("circle")
+                          .transition()
+                          .delay(function (d, i) { return (i * 3) })
+                          .duration(2000)
+                          .attr("cx", function (d) { return x(d.GrLivArea); })
+                          .attr("cy", function (d) { return y(d.SalePrice); })
+                    })
+
+     </script>
+
+</body>

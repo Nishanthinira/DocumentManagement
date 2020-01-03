@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/NewLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @*<meta charset="UTF-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Dashboard </title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+    <link rel="stylesheet" href="../modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="../dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>*@
+    @*<link href="~/Content/css/DragCSS.css" rel="stylesheet" />
+        <script src="~/scripts/DragScript.js"></script>*@
+
+</head>
+<body>
+    @{
+        var file = ViewBag.Message;
+    }
+
+    <div class="row">
+        <div class="col-lg-3 col-md-5 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-primary">
+                    <i class="ion-ios-paper"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h3>Reading</h3>
+                    </div>
+                    <div class="card-body">
+                        <b>
+                            Tests Completed:
+                            @foreach (var input in file)
+                            {
+                                if (input.SkillType.Equals("Reading"))
+                                {
+                                    <span> @input.NoOfTests</span>
+                                }
+                            }
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-5 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-danger">
+                    <i class="fa fa-pencil-square-o"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h3>Writing</h3>
+                    </div>
+                    <div class="card-body">
+                        <b>
+                            Tests Completed:
+                            @foreach (var input in file)
+                            {
+                                if (input.SkillType.Equals("Writing"))
+                                {
+                                    <span> @input.NoOfTests</span>
+                                }
+                            }
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-warning">
+                    <i class="fa fa-headphones" style="font-size:24px"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h3>Listening</h3>
+                    </div>
+                    <div class="card-body">
+                        <b>
+                            Tests Completed:
+                            @foreach (var input in file)
+                            {
+                                if (input.SkillType.Equals("Listening"))
+                                {
+                                    <span> @input.NoOfTests</span>
+                                }
+                            }
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-success">
+                    <i class="fa fa-microphone" style="font-size:24px"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h3>Speaking</h3>
+                    </div>
+                    <div class="card-body">
+                        <b>
+                            Tests Completed:
+                            @foreach (var input in file)
+                            {
+                                if (input.SkillType.Equals("Speaking"))
+                                {
+                                    <span> @input.NoOfTests</span>
+                                }
+                            }
+                        </b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-4 col-4 col-sm-12">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded" id="PieWithBar">
+                <div class="card-header" id="PieWithBarheader">
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <a href="#" class="btn active">Weekly</a>
+                        </div>
+                    </div>
+                    <h3 class="card-title">Individual Candidate Skills(%)</h3>
+                </div>
+                <div class="card-body  overflow-auto">
+                    @Html.Partial("PieWithBar")
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-4 col-4 col-sm-12">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="background-color:white" id="HeatMaps">
+                <div class="card-header" id="HeatMapsheader">
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <a href="#" class="btn active">Weekly</a>
+                        </div>
+                    </div>
+                    <h3 class="card-title">Current Week Results(%)</h3>
+                </div>
+                <div class="card-body  overflow-auto">
+                    @Html.Partial("HeatMaps")
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6 col-md-4 col-4 col-sm-12">
+
+            <div class="card" id="display" >
+                <div class="card-header card-header-warning" id="displayheader">
+                    <h3 class="card-title">Over All Performance of the candidates(%)</h3>
+                </div>
+                <br />
+                <br />
+                <div class="card-body  table-responsive">
+                    <font size="4">
+                        @{
+                            Html.RenderAction("Display");
+                        }
+                    </font>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6 col-md-4 col-4 col-sm-12">
+
+            <div class="card" id="mydiv">
+                <div class="card-header" id="mydivheader">
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <button class="btn btn-primary" onclick="update('TotalAverage')">Monthly</button>&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-primary" onclick="update('WeeklyAverage')">Weekly</button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <h3 class="card-title">Toppers List </h3>
+                </div>
+                <div class="card-body table-responsive">
+                    @Html.Partial("Lollipop")
+
+                </div>
+            </div>
+
+        </div>
+
+        <br />
+    </div>
+    <script>
+        //Make the DIV element draggagle:
+        //dragElement(document.getElementById("mydiv"));
+        //dragElement(document.getElementById("display"));
+        //dragElement(document.getElementById("HeatMaps"));
+        //dragElement(document.getElementById("histogram"));
+        //dragElement(document.getElementById("PieWithBar"));
+    </script>
+    @*<script src="../dist/modules/jquery.min.js"></script>
+    <script src="../dist/modules/popper.js"></script>
+    <script src="../dist/modules/tooltip.js"></script>
+    <script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="../dist/js/sa-functions.js"></script>
+
+    <script src="../dist/modules/chart.min.js"></script>
+    <script src="../dist/modules/summernote/summernote-lite.js"></script>
+    <script src="../dist/js/scripts.js"></script>
+    <script src="../dist/js/custom.js"></script>
+    <script src="../dist/js/demo.js"></script>*@
+</body>
+</html>
